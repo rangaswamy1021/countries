@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "@angular/material" as mat;
+@include mat.core();
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include mat.all-component-densities(-1);
+
+@import "./assets/scss/main.scss";
+
+body .mat-drawer-container {
+  background-color: #f1f5f9;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}

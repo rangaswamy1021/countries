@@ -1,0 +1,20 @@
+.mat-mdc-snack-bar-container {
+  &.st-snack-danger {
+    --mdc-snackbar-container-color: #bd362f;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+  &.st-snack-success {
+    --mdc-snackbar-container-color: #51a351;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+  &.st-snack-info {
+    --mdc-snackbar-container-color: #2f96b4;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+  .mdc-snackbar__label {
+    --mdc-snackbar-supporting-text-size: 16px;
+  }
+}
