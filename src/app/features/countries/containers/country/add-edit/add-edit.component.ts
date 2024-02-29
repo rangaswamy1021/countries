@@ -61,10 +61,6 @@ export class CountryAddEditComponent {
     private router: Router,
   ) {}
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
   /**
    * On init
    */
@@ -77,21 +73,15 @@ export class CountryAddEditComponent {
         .findOne(this.id)
         .pipe(first())
         .subscribe((country: Country) => {
-          // Get the country
           this.country = country;
-          // Clear the languages
           (this.countryForm.get('languages') as FormArray).clear();
 
-          // Patch values to the form
           this.countryForm.patchValue(country);
 
-          // Setup the languages form array
           const languagesFormGroups = [];
 
           if (country.languages.length > 0) {
-            // Iterate through them
             country.languages.forEach((language) => {
-              // Create an language form group
               languagesFormGroups.push(
                 this.fb.group({
                   name: [language.name],
@@ -100,7 +90,6 @@ export class CountryAddEditComponent {
               );
             });
           } else {
-            // Create an language form group
             languagesFormGroups.push(
               this.fb.group({
                 email: [''],
@@ -109,7 +98,6 @@ export class CountryAddEditComponent {
             );
           }
 
-          // Add the language form groups to the languages form array
           languagesFormGroups.forEach((languageFormGroup) => {
             (this.countryForm.get('languages') as FormArray).push(
               languageFormGroup,
@@ -120,7 +108,6 @@ export class CountryAddEditComponent {
   }
 
   buildForm(): void {
-    // Create the form
     this.countryForm = this.fb.group({
       name: ['', [Validators.required]],
       population: ['', Validators.required],
@@ -137,17 +124,12 @@ export class CountryAddEditComponent {
     });
   }
 
-  /**
-   * Add the language field
-   */
   addEmailField(): void {
-    // Create an empty email form group
     const languageFormGroup = this.fb.group({
       name: [''],
       code: [''],
     });
 
-    // Add the language form group to the languages form array
     (this.countryForm.get('languages') as FormArray).push(languageFormGroup);
   }
 
@@ -157,16 +139,13 @@ export class CountryAddEditComponent {
    * @param index
    */
   removeEmailField(index: number): void {
-    // Get form array for languages
     const languagesFormArray = this.countryForm.get('languages') as FormArray;
 
-    // Remove the language field
     languagesFormArray.removeAt(index);
   }
 
   save() {
     this.submitted = true;
-    // stop here if form is invalid
     if (this.countryForm.invalid) {
       return;
     }
