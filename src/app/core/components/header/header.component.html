@@ -1,0 +1,47 @@
+<mat-toolbar
+  class="mat-elevation-z9 sticky top-0 z-10 flex h-14 flex-shrink-0 !bg-gray-900 text-white shadow-md"
+>
+  <mat-toolbar-row class="items-stretch px-0 font-normal mx-auto max-w-7xl">
+    <div class="flex flex-1 justify-between px-4">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 flex items-center pr-10">
+          <div class="logo text-white uppercase text-2xl font-bold leading-4">
+            LOGO
+          </div>
+        </div>
+
+        <div class="sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <a
+              routerLink="/"
+              routerLinkActive="border-sky-500"
+              class="text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-light uppercase"
+            >
+              Home
+            </a>
+            <a
+              routerLink="/countries"
+              class="border-transparent text-gray-200 hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-light uppercase"
+            >
+              Countries
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ml-4 flex items-center md:ml-6">
+        <div class="ml-auto flex items-center gap-x-4 space-x-0.5 sm:space-x-2">
+          <div class="flex gap-x-4">
+            <button mat-icon-button color="primary">
+              <img
+                class="h-8 w-8 rounded-full"
+                src="assets/images/profile.png"
+                alt=""
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
