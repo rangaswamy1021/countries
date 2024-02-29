@@ -1,0 +1,55 @@
+<div class="flex max-h-screen flex-col w-full h-full">
+  <!-- header -->
+
+  <div
+    class="flex-0 text-on-primary flex items-center justify-between bg-primary-800 text-white pr-3"
+  >
+    <div
+      mat-dialog-title
+      class="st-modal-title mb-0 text-lg font-normal uppercase tracking-wide !text-white before:h-0"
+    >
+      {{ data.title }}
+    </div>
+    <button
+      mat-icon-button
+      mat-dialog-close
+      disableRipple
+      class="ml-auto mb-0 p-0 pt-1.5 text-white"
+    >
+      <mat-icon class="mat-close">close</mat-icon>
+    </button>
+  </div>
+
+  <!-- mat-dialog-content -->
+
+  <div class="flex flex-auto flex-col overflow-y-auto p-6">
+    <div class="flex pb-6">
+      <p
+        [innerHTML]="
+          data?.itemId ? data.message + ' ' + data?.itemId : data.message
+        "
+      ></p>
+    </div>
+
+    <!-- actions -->
+
+    <div mat-dialog-actions class="d-flex !p-0">
+      <button
+        mat-raised-button
+        color="primary"
+        class="mr-3 font-medium text-white"
+        (click)="onConfirm()"
+      >
+        {{ data?.confirmText }}
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        class="font-medium"
+        (click)="onDismiss()"
+      >
+        {{ data?.cancelText }}
+      </button>
+    </div>
+  </div>
+</div>
