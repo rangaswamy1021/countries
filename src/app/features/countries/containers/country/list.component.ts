@@ -38,9 +38,7 @@ export class CountryListComponent implements OnInit {
   ) {}
 
   private unsubscribeAll: Subject<any> = new Subject<any>();
-
   countries: Country[];
-
   ordersTableColumns: TableColumn[] = [];
 
   initializeColumns(): void {
@@ -88,7 +86,6 @@ export class CountryListComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe((data) => {
         this.countries = data;
-        console.log(data);
       });
   }
 

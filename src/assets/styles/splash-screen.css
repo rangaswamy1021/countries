@@ -34,10 +34,12 @@ body core-splash-screen .core-loader {
   text-indent: -99999em;
   margin: 10px auto;
   position: relative;
-  width: 10pem;
+  width: 10em;
   height: 10em;
-  box-shadow: inset 0 0 1em;
-  transform: translate(0);
+  box-shadow: inset 0 0 0 1em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 body core-splash-screen .core-loader:before,
@@ -53,7 +55,9 @@ body core-splash-screen .core-loader:before {
   border-radius: 10.2em 0 0 10.2em;
   top: -0.1em;
   left: -0.1em;
+  -webkit-transform-origin: 5.1em 5.1em;
   transform-origin: 5.1em 5.1em;
+  -webkit-animation: load2 2s infinite ease 1.5s;
   animation: load2 2s infinite ease 1.5s;
 }
 
@@ -64,8 +68,10 @@ body core-splash-screen .core-loader:after {
   border-radius: 0 10.2em 10.2em 0;
   top: -0.1em;
   right: 4.9em;
+  -webkit-transform-origin: 0.1em 5.1em;
   transform-origin: 0.1em 5.1em;
-  animation: load2 2s infinite ease 1.5s;
+  -webkit-animation: load2 2s infinite ease;
+  animation: load2 2s infinite ease;
 }
 
 @-webkit-keyframes load2 {

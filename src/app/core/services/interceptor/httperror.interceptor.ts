@@ -70,7 +70,7 @@ export const httpErrorInterceptor = (
         }
       }
     }
-    snackBarService.openSanckBar('Okay', 'st-snack-danger');
+    snackBarService.openSanckBar('Server side something went wrong', 'st-snack-danger');
     return throwError(() => err);
   }
 };

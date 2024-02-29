@@ -19,10 +19,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 import { SnackBarService } from '@core/services/snack-bar/snack-bar.service';
 import { Country } from '@features/countries/models/countries.types';
 import { BreadcrumbComponent } from '@features/countries/components/breadcrumb/breadcrumb.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-country-add-edit',
@@ -46,11 +47,11 @@ import { BreadcrumbComponent } from '@features/countries/components/breadcrumb/b
   templateUrl: './add-edit.component.html',
 })
 export class CountryAddEditComponent {
+  private unsubscribeAll: Subject<any> = new Subject<any>();
   countryForm: FormGroup;
   id!: string;
   country: Country;
   isAddMode!: boolean;
-  loading = false;
   submitted = false;
 
   constructor(
@@ -75,11 +76,8 @@ export class CountryAddEditComponent {
         .subscribe((country: Country) => {
           this.country = country;
           (this.countryForm.get('languages') as FormArray).clear();
-
           this.countryForm.patchValue(country);
-
           const languagesFormGroups = [];
-
           if (country.languages.length > 0) {
             country.languages.forEach((language) => {
               languagesFormGroups.push(
@@ -97,7 +95,6 @@ export class CountryAddEditComponent {
               }),
             );
           }
-
           languagesFormGroups.forEach((languageFormGroup) => {
             (this.countryForm.get('languages') as FormArray).push(
               languageFormGroup,
@@ -124,54 +121,46 @@ export class CountryAddEditComponent {
     });
   }
 
+  
   addEmailField(): void {
     const languageFormGroup = this.fb.group({
       name: [''],
       code: [''],
     });
-
     (this.countryForm.get('languages') as FormArray).push(languageFormGroup);
   }
 
-  /**
-   * Remove the email field
-   *
-   * @param index
-   */
   removeEmailField(index: number): void {
     const languagesFormArray = this.countryForm.get('languages') as FormArray;
-
     languagesFormArray.removeAt(index);
   }
 
-  save() {
+  save(): void {
     this.submitted = true;
     if (this.countryForm.invalid) {
       return;
     }
-
-    this.loading = true;
     if (this.isAddMode) {
-      this.createUser();
+      this.createCountry();
     } else {
-      this.updateUser();
+      this.updateCountry();
     }
   }
 
-  private createUser() {
+  private createCountry(): void{
     this.countriesService
       .save(this.countryForm.value)
-      .pipe(first())
+      .pipe(takeUntil(this.unsubscribeAll), first())
       .subscribe(() => {
         this.snankBarService.openSanckBar('New country created successfully');
         this.router.navigate(['../'], { relativeTo: this.route });
       });
   }
 
-  private updateUser() {
+  private updateCountry(): void {
     this.countriesService
       .update(this.id, this.countryForm.value)
-      .pipe(first())
+      .pipe(takeUntil(this.unsubscribeAll), first())
       .subscribe(() => {
         this.snankBarService.openSanckBar('Country updated successfully');
         this.router.navigate(['../../'], { relativeTo: this.route });
@@ -186,5 +175,10 @@ export class CountryAddEditComponent {
    */
   trackByFn(index: number, item: any): any {
     return item.id || index;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next(true);
+    this.unsubscribeAll.complete();
   }
 }

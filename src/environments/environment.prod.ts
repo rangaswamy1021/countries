@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://rsecommerce.vercel.app',
+  apiUrl: 'https://rangaswamy-countries-api.vercel.app',
   // apiUrl: 'http://localhost:3000',
 };
