@@ -1,0 +1,100 @@
+body core-splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2857a7;
+  color: #f9fafb;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body core-splash-screen img {
+  width: 120px;
+  max-width: 120px;
+}
+
+body core-splash-screen .core-loader,
+body core-splash-screen .core-loader:before,
+body core-splash-screen .core-loader:after {
+  border-radius: 50%;
+}
+
+body core-splash-screen .core-loader {
+  color: #ffffff;
+  font-size: 11px;
+  text-indent: -99999em;
+  margin: 10px auto;
+  position: relative;
+  width: 10pem;
+  height: 10em;
+  box-shadow: inset 0 0 1em;
+  transform: translate(0);
+}
+
+body core-splash-screen .core-loader:before,
+body core-splash-screen .core-loader:after {
+  position: absolute;
+  content: "";
+}
+
+body core-splash-screen .core-loader:before {
+  width: 5.2em;
+  height: 10.2em;
+  background: #2857a7;
+  border-radius: 10.2em 0 0 10.2em;
+  top: -0.1em;
+  left: -0.1em;
+  transform-origin: 5.1em 5.1em;
+  animation: load2 2s infinite ease 1.5s;
+}
+
+body core-splash-screen .core-loader:after {
+  width: 5.2em;
+  height: 10.2em;
+  background: #2857a7;
+  border-radius: 0 10.2em 10.2em 0;
+  top: -0.1em;
+  right: 4.9em;
+  transform-origin: 0.1em 5.1em;
+  animation: load2 2s infinite ease 1.5s;
+}
+
+@-webkit-keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+body:not(.core-splash-screen-hidden) {
+  overflow: hidden;
+}
+
+body.core-splash-screen-hidden core-splash-screen {
+  visibility: hidden;
+  opacity: 0;
+}
