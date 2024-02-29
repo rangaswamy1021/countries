@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve && json-server server/db.json -w",
+    "start": "ng serve",
     "build": "ng build",
     "format": "prettier --write \"src/**/*\"",
     "watch": "ng build --watch --configuration development",
