@@ -1,0 +1,157 @@
+<!-- Main -->
+<app-breadcrumb
+  [title]="'Country'"
+  [breadcrumb]="isAddMode ? 'Add New Country' : 'Update Country'"
+></app-breadcrumb>
+<div class="flex-auto p-6 mt-2 bg-gray-100">
+  <div class="max-w-2xl mx-auto">
+    <form
+      [formGroup]="countryForm"
+      class="flex flex-col px-8 bg-card shadow rounded bg-white overflow-hidden"
+    >
+      <div
+        class="flex items-center justify-start border-t -mx-8 mb-8 px-8 py-5 bg-gray-50 dark:bg-gray-700"
+      >
+        <p class="text-lg font-semibold">
+          {{ isAddMode ? "New Country" : "Update Country" }}
+        </p>
+      </div>
+
+      <div class="flex flex-col">
+        <!-- Name field -->
+        <mat-form-field class="w-full">
+          <mat-label>Country Name</mat-label>
+          <input id="name" matInput formControlName="name" />
+          <mat-error *ngIf="countryForm.get('name').hasError('required')">
+            Country Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Population</mat-label>
+          <input id="population" matInput formControlName="population" />
+          <mat-error *ngIf="countryForm.get('population').hasError('required')">
+            Population is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Capital</mat-label>
+          <input id="capital" matInput formControlName="capital" />
+          <mat-error *ngIf="countryForm.get('capital').hasError('required')">
+            Capital is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Flag</mat-label>
+          <input id="flag" matInput formControlName="flag" />
+          <mat-error *ngIf="countryForm.get('flag').hasError('required')">
+            Flag is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Currencies</mat-label>
+          <input id="currencies" matInput formControlName="currencies" />
+          <mat-error *ngIf="countryForm.get('currencies').hasError('required')">
+            Currencies is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Region</mat-label>
+          <input id="region" matInput formControlName="region" />
+          <mat-error *ngIf="countryForm.get('region').hasError('required')">
+            Region is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mt-0">
+        <div class="space-y-4">
+          <ng-container
+            *ngFor="
+              let language of countryForm.get('languages')['controls'];
+              let i = index;
+              let first = first;
+              let last = last;
+              trackBy: trackByFn
+            "
+          >
+            <div class="flex">
+              <mat-form-field class="flex-auto" [subscriptSizing]="'dynamic'">
+                <mat-label *ngIf="first">Name</mat-label>
+                <input
+                  matInput
+                  [formControl]="language.get('name')"
+                  [placeholder]="'Name'"
+                  [spellcheck]="false"
+                />
+                <mat-error *ngIf="language.get('name').hasError('required')">
+                  Name is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field
+                class="flex-auto w-full max-w-24 sm:max-w-40 ml-2 sm:ml-4"
+                [subscriptSizing]="'dynamic'"
+              >
+                <mat-label *ngIf="first">Code</mat-label>
+
+                <input
+                  matInput
+                  [formControl]="language.get('code')"
+                  [placeholder]="'Code'"
+                />
+                <mat-error *ngIf="language.get('code').hasError('required')">
+                  Code is required
+                </mat-error>
+              </mat-form-field>
+              <!-- Remove email -->
+              <ng-container *ngIf="!(first && last)">
+                <div
+                  class="flex items-center w-10 pl-2"
+                  [ngClass]="{ 'mt-6': first }"
+                >
+                  <button
+                    class="w-8 h-8 min-h-8"
+                    mat-icon-button
+                    (click)="removeEmailField(i)"
+                    matTooltip="Remove"
+                  >
+                    <mat-icon class="icon-size-5">delete</mat-icon>
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+        <div
+          class="group inline-flex items-center mt-2 -ml-4 py-2 px-4 rounded cursor-pointer"
+          (click)="addEmailField()"
+        >
+          <mat-icon class="text-gray-500 text-xl pb-1 leading-6"
+            >add_circle</mat-icon
+          >
+          <span
+            class="text-gray-500 ml-1 text-sm font-semibold hover:underline text-secondary group-hover:underline"
+            >Add Language</span
+          >
+        </div>
+      </div>
+
+      <div
+        class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700"
+      >
+        <button type="button" routerLink="/countries" mat-button>Cancel</button>
+        <button
+          (click)="save()"
+          class="px-6 ml-5"
+          mat-flat-button
+          [color]="'primary'"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

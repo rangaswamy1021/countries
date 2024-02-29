@@ -1,0 +1,41 @@
+<app-breadcrumb
+  [title]="'Country'"
+  [breadcrumb]="'Countries list'"
+></app-breadcrumb>
+
+<div class="table-card rounded-lg bg-gray-100 p-8 mb-2">
+  <div class="table-header flex items-center pb-5">
+    <div class="sm:flex-auto"></div>
+    <div class="ml-16">
+      <button
+        mat-flat-button
+        [routerLink]="['./add']"
+        color="primary"
+        class="rounded-md bg-primary-500 font-normal leading-10 text-white shadow-sm"
+      >
+        <mat-icon class="text-lg leading-4">add</mat-icon>
+        Add Country
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="table-body overflow-hidden rounded-lg shadow ring-1 ring-black ring-opacity-5"
+  >
+    <app-custom-table
+      [tableData]="countries"
+      [tableColumns]="ordersTableColumns"
+      [isFilterable]="true"
+      [isPageable]="true"
+      [isSortable]="true"
+      [paginationSizes]="[10, 100, 500]"
+      [defaultPageSize]="8"
+      [searchPlaceholder]="'Search countries'"
+      (sort)="sortData($event)"
+      [rowActionIcon]="'required'"
+      (deleteAction)="deleteCountry($event)"
+      (editAction)="editCountry($event)"
+    >
+    </app-custom-table>
+  </div>
+</div>
